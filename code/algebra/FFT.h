@@ -2,6 +2,8 @@
 using namespace std;
 typedef long long ll;
 
+// https://codeforces.com/problemset/problem/528/D
+
 typedef double R;
 typedef complex<R> C;
 typedef vector<C> poly_C;
