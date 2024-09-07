@@ -6,7 +6,7 @@ template <int m>
 struct mint {
     int x;
     mint(int x = 0) : x(x) {}
-    static mint binpow(mint a, ll b) {
+    friend mint binpow(mint a, ll b) {
         mint res = 1;
         while (b) { if (b & 1) res *= a; b >>= 1; a *= a; }
         return res;
