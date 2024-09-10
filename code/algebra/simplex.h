@@ -15,7 +15,6 @@ struct LPSolver {
     int m, n;
     vector<int> B, N;
     mat D;
-
     LPSolver(const mat &A, const vec &b, const vec &c) :
         m((int) b.size()), n((int) c.size()), N(n + 1), B(m), D(m + 2, vec(n + 2)) {
         for (int i = 0; i < m; i++) for (int j = 0; j < n; j++) D[i][j] = A[i][j];
@@ -23,7 +22,6 @@ struct LPSolver {
         for (int j = 0; j < n; j++) { N[j] = j; D[m][j] = -c[j]; }
         N[n] = -1; D[m + 1][n] = 1;
     }
-
     void Pivot(int r, int s) {
         R inv = 1.0 / D[r][s];
         for (int i = 0; i < m + 2; i++) if (i != r)
@@ -34,7 +32,6 @@ struct LPSolver {
         D[r][s] = inv;
         swap(B[r], N[s]);
     }
-
     bool Simplex(int phase) {
         int x = phase == 1 ? m + 1 : m;
         while (true) {
@@ -58,7 +55,7 @@ struct LPSolver {
             Pivot(r, s);
         }
     }
-
+    // res = {max c^T x, x}
     pair<R, vec> Solve() {
         vec x;
         int r = 0;
