@@ -27,7 +27,7 @@ pair<poly, poly> euclidean_division_given_inverse(const poly& a, const poly& b, 
     return {d, r};
 }
 
-// res = (p(x) * q(x)) mod (x^n - b_{0} x^{n - 1} - ... - b_{n - 1})
+// res = (p(x) * q(x)) mod b(x)
 // O(n log(n))
 void fast_mult(poly& p, poly& q, const poly& b, const poly& b_r_inv) {
     int n = (int) p.size();
