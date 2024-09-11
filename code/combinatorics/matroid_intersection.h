@@ -7,11 +7,11 @@ typedef long long ll;
 
 // #vertices or colors <= 100
 // #edges <= 5000
-// O((solution size) * (ground set size)) = O(#vertices * #edges)
+// O((solution size) * (ground set size) * log(ground set size)) = O(#vertices * #edges * log(#edges))
 const int K = 105;
 
 struct Edge { int u, v; };
-struct Elem { int col; Edge e; bool in = false; int pos, par; };
+struct Elem { Edge e; int col; bool in = false; int pos, par; };
 
 vector<Elem> all;
 vector<int> ind;
@@ -76,7 +76,7 @@ bool augment() {
     return true;
 }
 
-void add_element(Edge e, int col) { all.push_back({col, e}); }
+void add_element(Edge e, int col) { all.push_back({e, col}); }
 void matroid_intersection() { while (augment()); }
 
 void Solve() {
