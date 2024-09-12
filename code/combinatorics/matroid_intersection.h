@@ -13,8 +13,7 @@ const int K = 105;
 struct Edge { int u, v; };
 struct Elem { Edge e; int col; bool in = false; int pos, par; };
 
-vector<Elem> all;
-vector<int> ind;
+vector<Elem> all; vector<int> ind;
 
 struct Graph {
     vector<Edge> es;
@@ -49,30 +48,26 @@ struct ColorfulMatroid {
     void init() { fill(used, used + K, false); for (int i : ind) used[all[i].col] = true; }
 };
 
-GraphMatroid graph;
-ColorfulMatroid color;
+GraphMatroid graph; ColorfulMatroid color;
 
 bool augment() {
-    const int src = -1, nvis = -2, nfou = -3;
-    graph.init(); color.init();
-    for (auto& e : all) e.par = nvis;
-    int id = nfou; queue<int> q;
+    const int src = -1, nvis = -2, nfou = -3; graph.init(); color.init();
+    for (auto& e : all) e.par = nvis; int id = nfou; queue<int> q;
     for (int i = 0; i < all.size(); i++) if (color.oracle(i)) { all[i].par = src; q.push(i); }
     while (!q.empty()) {
-        int cur = q.front(); q.pop();
-        if (all[cur].in) {
-            for (int to = 0; to < all.size(); to++) {
-                if (all[to].par == nvis && color.oracle(to, cur)) {
-                    all[to].par = cur; q.push(to); } } continue; }
-        if (graph.oracle(cur)) { id = cur; break; }
-        for (int to : ind) {
-            if (all[to].par == nvis && graph.oracle(cur, to)) {
-                all[to].par = cur; q.push(to); } } }
+        int v = q.front(); q.pop();
+        if (all[v].in) {
+            for (int u = 0; u < all.size(); u++) {
+                if (all[u].par == nvis && color.oracle(u, v)) {
+                    all[u].par = v; q.push(u); } } continue; }
+        if (graph.oracle(v)) { id = v; break; }
+        for (int u : ind) {
+            if (all[u].par == nvis && graph.oracle(v, u)) {
+                all[u].par = v; q.push(u); } } }
     if (id == nfou) return false;
     do { all[id].in ^= true; id = all[id].par; } while (id != src);
     ind.clear();
-    for (int i = 0; i < all.size(); i++) {
-        if (all[i].in) { all[i].pos = (int) ind.size(); ind.push_back(i); } }
+    for (int i = 0; i < all.size(); i++) if (all[i].in) { all[i].pos = (int) ind.size(); ind.push_back(i); }
     return true;
 }
 
