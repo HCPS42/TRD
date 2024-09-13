@@ -33,7 +33,7 @@ int jacobi(ll a, ll m) {
 // (b + sqrt(b^2 - a))^((p+1)/2) in F_p(sqrt(b^2 - a))
 vector<ll> sqrt_mod(ll a, ll p) {
     if (p == 2) return {a & 1};
-    const int j = jacobi(a, p);
+    int j = jacobi(a, p);
     if (j == 0) return {0};
     if (j == -1) return {};
     ll b, d;
