@@ -2,6 +2,9 @@
 using namespace std;
 typedef long long ll;
 
+// PTZ Winter 2024, Day 1, problem I
+// https://official.contest.yandex.com/ptz-winter-2024/contest/59080/problems/I1/
+
 bool eq(const ll& a, const ll& b) { return a == b; }
 bool gt(const ll& a, const ll& b) { return a > b; }
 bool lt(const ll& a, const ll& b) { return a < b; }
