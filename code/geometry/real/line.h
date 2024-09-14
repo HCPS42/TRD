@@ -5,7 +5,7 @@ struct Line {
     Line(P a, P b) { p[0] = a; p[1] = b; }
     P& oper[](int i) { return p[i]; }
     con P& oper[](int i) con { return p[i]; }
-    P normal() {
+    P normal() const {
         P a = p[1] - p[0];
         return {-a.y, a.x};
     }
