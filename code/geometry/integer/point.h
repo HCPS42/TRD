@@ -30,7 +30,7 @@ struct P {
     fri ll cro(con P& a, con P& b) { return a.x * b.y - a.y * b.x; }
     fri ll cro (con P& a, con P& b, con P& c) { return cro(b - a, c - a); }
     ll norm2() con { return sq(x) + sq(y); }
-    ll norm() con { return sqrt(R(sq(x) + sq(y))); }
+    R norm() con { return sqrt(R(sq(x) + sq(y))); }
     fri ll dist2(con P& a, con P& b) { return (a - b).norm2(); }
     fri R dist(con P& a, con P& b) { return (a - b).norm(); }
     R angle() { return atan2(R(y), R(x)); }
